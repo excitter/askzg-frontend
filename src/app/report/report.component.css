@@ -1,0 +1,14 @@
+.year-selector {
+  border-bottom: 1px solid whitesmoke;
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+}
+
+#membershipContainer{
+  margin-bottom: 30px;
+}
+
+.active {
+  color: green;
+  border-color: green;
+}

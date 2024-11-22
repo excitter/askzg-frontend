@@ -1,0 +1,10 @@
+.year-paginator {
+  border-bottom: 1px solid whitesmoke;
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+}
+
+.year-text {
+  text-align: center;
+  line-height: 55px;
+}

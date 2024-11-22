@@ -1,0 +1,45 @@
+<div>
+  <a type="button" class="btn btn-outline-inverse btn-lg pull-right mb10" (click)="onExport()">
+    <span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span>
+  </a>
+  <app-year-pagination (yearChanged)="onYearChanged($event)" [currentYear]="currentYear" [minYear]="2014"></app-year-pagination>
+  <img src="assets/images/theme_images/loader-form.GIF" *ngIf="loading1 || loading2"/>
+
+  <div id="membersContainer" class="clearfix">
+    <h4>Članovi na treninzima</h4>
+    <div *ngIf="!loading2 && memberStatistics.length==0">
+      Nema podataka
+    </div>
+    <div *ngIf="!loading2 && memberStatistics.length>0">
+      <div class="form-check mb10">
+        <button class="btn btn-outline-inverse" [ngClass]="filter.active ? 'active':''" (click)="filter.active=!filter.active;onFilterChanged()">
+          Samo trenutno aktivni
+        </button>
+      </div>
+      <app-member-statistics *ngFor="let stat of memberStatistics" [statistics]="stat" [year]="currentYear"></app-member-statistics>
+    </div>
+  </div>
+
+  <div id="trainingTimeContainer" class="clearfix">
+    <h4>Treninzi</h4>
+    <div *ngIf="!loading1 && trainingTimeStatistics.length==0">
+      Nema podataka
+    </div>
+    <div *ngIf="!loading1 && trainingTimeStatistics.length>0">
+      <div class="average">
+        Broj treninga: {{trainingTimeStatistics.length}}. Prosjek: {{average}}
+      </div>
+      <app-training-statistics *ngFor="let stat of trainingTimeStatistics" [statistics]="stat"></app-training-statistics>
+    </div>
+  </div>
+
+  <div id="monthlyTrainingContainer" class="clearfix">
+    <h4>Po mjesecima</h4>
+    <div *ngIf="!loading1 && monthlyTrainingStatistics.length==0">
+      Nema podataka
+    </div>
+    <div *ngIf="!loading1 && monthlyTrainingStatistics.length>0">
+      <app-monthly-statistics [monthlyStatistics]="monthlyTrainingStatistics"></app-monthly-statistics>
+    </div>
+  </div>
+</div>

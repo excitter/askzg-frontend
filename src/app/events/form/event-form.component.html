@@ -1,0 +1,52 @@
+<form class="form-style clearfix" #eventForm="ngForm" (submit)="onSave()" novalidate>
+
+  <div class="form-group">
+    Tip:
+    <div *ngIf="!event.id" class="inline">
+      <div class="btn btn-outline-inverse" (click)="event.type='TRAINING'" [ngClass]="event.type=='TRAINING'?'active':''">
+        Trening
+      </div>
+      <div class="btn btn-outline-inverse" (click)="event.type='EVENT'" [ngClass]="event.type=='EVENT'?'active':''">
+        Susret
+      </div>
+      <div class="btn btn-outline-inverse" (click)="event.type='OTHER'" [ngClass]="event.type=='OTHER'?'active':''">
+        Ostalo
+      </div>
+    </div>
+    <div *ngIf="event.id>0" class="inline">
+      {{event.type | eventTypeToText}}
+    </div>
+  </div>
+
+  <div class="form-group">
+    <input type="text" class="text-field form-control" [placeholder]="event.type=='TRAINING'?'Lokacija':'Ime'" name="name"
+           [(ngModel)]="event.name" required>
+  </div>
+
+  <div class="form-group">
+    <input type="text" class="text-field form-control" placeholder="Datum" name="date" [(ngModel)]="event.date" appDateFormat required (change)="onDateChanged()">
+  </div>
+
+  <div class="form-group" *ngIf="event.type=='EVENT'">
+    <input type="number" class="text-field form-control" placeholder="Cijena" name="price" [(ngModel)]="event.price" required>
+  </div>
+
+
+  <div class="form-group clearfix" *ngIf="event.type=='TRAINING' || event.type=='EVENT'">
+    <div *ngFor="let member of members">
+      <app-event-participation [member]="member" [event]="event"></app-event-participation>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <img src="assets/images/theme_images/loader-form.GIF" *ngIf="saveInProgress">
+    <button type="submit" class="btn btn-sm btn-outline-inverse" *ngIf="!saveInProgress"
+            [disabled]="eventForm.invalid"
+            [ngClass]="{'error':error}">
+      Spremi
+    </button>
+    <a class="btn btn-sm btn-outline-inverse" *ngIf="!saveInProgress" (click)="onBack()">
+      Natrag
+    </a>
+  </div>
+</form>

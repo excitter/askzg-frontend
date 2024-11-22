@@ -1,0 +1,27 @@
+<form class="form-style clearfix" #paymentForm="ngForm" (submit)="onSave()" novalidate>
+  <div class="form-group row no-margin">
+    <div class="btn btn-outline-inverse plus-minus" (click)="togglePlusMinus()">
+      <span class="glyphicon" aria-hidden="true" [ngClass]="negative?'glyphicon-minus':'glyphicon-plus'"></span>
+    </div>
+    <input type="number" class="text-field form-control amount" placeholder="Iznos" name="amount" [(ngModel)]="payment.amount"
+           required>
+  </div>
+  <div class="form-group">
+    <input type="text" class="text-field form-control" placeholder="Datum" name="date"
+           [(ngModel)]="payment.date" appDateFormat required>
+  </div>
+  <div class="form-group">
+    <input type="text" class="text-field form-control"
+           placeholder="Komentar" name="comment" [(ngModel)]="payment.comment">
+  </div>
+  <div class="form-group">
+    <img src="assets/images/theme_images/loader-form.GIF" *ngIf="saveInProgress">
+    <button type="submit" class="btn btn-sm btn-outline-inverse" *ngIf="!saveInProgress" [disabled]="paymentForm.invalid"
+            [ngClass]="{'error':error}" (click)="onSave()">
+      Spremi
+    </button>
+    <a class="btn btn-sm btn-outline-inverse" *ngIf="!saveInProgress" (click)="onBack()">
+      Natrag
+    </a>
+  </div>
+</form>

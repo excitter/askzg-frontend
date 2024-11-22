@@ -1,0 +1,21 @@
+<div *ngIf="userDataChecked">
+  <form class="form-style clearfix col-md-6" #loginForm="ngForm" (submit)="doLogin()">
+    <div class="form-group">
+      <input type="text" class="text-field form-control" placeholder="Username"
+             name="username" required [(ngModel)]="username">
+    </div>
+    <div class="form-group">
+      <input type="password" class="text-field form-control" placeholder="Password"
+             name="password" required [(ngModel)]="password">
+    </div>
+    <div class="form-group error" *ngIf="loginError">
+      Krivi username i/ili password
+    </div>
+    <div class="form-group">
+      <img src="assets/images/theme_images/loader-form.GIF" *ngIf="loginInProgress">
+      <button type="submit" class="btn btn-sm btn-outline-inverse" *ngIf="!loginInProgress">
+        Login
+      </button>
+    </div>
+  </form>
+</div>

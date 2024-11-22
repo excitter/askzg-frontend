@@ -1,0 +1,50 @@
+<div>
+  <div class="mb20">
+    <button class="btn btn-outline-inverse btn-lg" [routerLink]="['/payments/new']">
+      <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+    </button>
+    <button class="btn btn-outline-inverse btn-lg pull-right" (click)="onExport()">
+      <span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span>
+    </button>
+  </div>
+  <app-year-pagination (yearChanged)="onYearChanged($event)" [currentYear]="currentYear"></app-year-pagination>
+  <div class="form-check form-style ">
+    <button class="btn btn-outline-inverse" [ngClass]="filter.income ? 'active':''" (click)="filter.income=!filter.income;onFilterChanged()">
+      Prihodi
+    </button>
+    <button class="btn btn-outline-inverse" [ngClass]="filter.expense ? 'active':''" (click)="filter.expense=!filter.expense;onFilterChanged()">
+      Rashodi
+    </button>
+    <div class="form-group filter-input">
+      <input type="text" class="text-field form-control" style="height: 35px!important; border-left:1px solid white!important" [(ngModel)]="filter.text" (ngModelChange)="onFilterChanged()"/>
+    </div>
+    <div *ngIf="sumAll!=null" class="count-icon">
+      <span *ngIf="sumFiltered == null">{{sumAll | number : '.2-2'}} €</span>
+      <span *ngIf="sumFiltered != null">{{sumFiltered | number : '.2-2'}} ({{sumAll | number : '.2-2'}}) €</span>
+    </div>
+  </div>
+  <table class="table app-table payment-table">
+    <thead>
+    <tr>
+      <th>Datum</th>
+      <th>Iznos</th>
+      <th>Opis</th>
+      <th class="hidden-xs">Stanje</th>
+      <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let payment of payments">
+      <td>{{payment.date.substr(0, payment.date.lastIndexOf('.'))}}</td>
+      <td>{{payment.amount | number : '.2-2'}}</td>
+      <td class="comment">{{payment.comment | minimize}}</td>
+      <td class="hidden-xs">{{payment.balance | number : '.2-2'}}</td>
+      <td>
+        <app-payment-actions [payment]="payment" (deleteEvent)="onDelete($event)" (editEvent)="onEdit($event)"></app-payment-actions>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+  <app-pagination (pageChanged)="onPageChanged($event)" *ngIf="filteredPayments.length>0"
+                  [pageSize]="pageSize" [page]="currentPage" [count]="filteredPayments.length"></app-pagination>
+</div>

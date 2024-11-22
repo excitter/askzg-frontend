@@ -1,0 +1,64 @@
+<div *ngIf="statistics!=null">
+  <h4>{{statistics.member.member.name}}</h4>
+  <div class="mb20">
+    <div>
+      Broj aktivnih dana: {{statistics.activeDays}}
+    </div>
+    <table class="table app-table table-responsive">
+      <thead>
+      <tr>
+        <th>Datum</th>
+        <th>Status</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let s of statistics.member.periods">
+        <td>{{s.start}}</td>
+        <td>{{toStatusName(s.status)}}</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="members.length>0">
+    <div class="form-group row">
+      <label class="col-xs-6 col-md-3 col-lg-2">Usporedi sa:</label>
+      <select class="text-field col-xs-6 col-md-4 col-lg-3" [(ngModel)]="compareMemberId" name="compareMemberId" (ngModelChange)="onCompareChange()">
+        <option value="0"></option>
+        <option *ngFor="let m of members" [value]="m.id">{{m.name}}</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="mb20">
+    <table class="table app-table table-responsive" [ngClass]="statisticsCompare!=null?'compare-table':'simple-table'">
+      <thead>
+      <tr *ngIf="statisticsCompare == null">
+        <th>Godina</th>
+        <th>Treninzi</th>
+        <th>Susreti</th>
+      </tr>
+      <tr *ngIf="statisticsCompare != null">
+        <th>Godina</th>
+        <th colspan="2" class="text-center">Treninzi</th>
+        <th colspan="2" class="text-center">Susreti</th>
+      </tr>
+      <tr *ngIf="statisticsCompare != null">
+        <th></th>
+        <th>{{statistics.member.member.name}}</th>
+        <th>{{statisticsCompare.member.member.name}}</th>
+        <th>{{statistics.member.member.name}}</th>
+        <th>{{statisticsCompare.member.member.name}}</th>
+      </tr>
+
+      </thead>
+      <tbody>
+      <tr *ngFor="let row of tableEntries">
+        <td *ngFor="let cell of row" [ngClass]="{'greater':cell.greater}">
+          {{cell.text}}
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

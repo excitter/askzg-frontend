@@ -1,0 +1,19 @@
+<div class="col-xs-6 col-sm-4 col-md-3 col-lg-2 mb10">
+  <div class="btn btn-lg btn-outline-inverse member-statistic" (click)="isList=!isList">
+    <div *ngIf="!isList">
+      <div class="name"> {{statistics.member.name}}</div>
+      <div class="percentage"> {{statistics.percentage | percentage}}</div>
+      <div class="counts">
+        <span class="attended">{{statistics.attended}}</span>
+        <span class="unable">{{statistics.unableToAttend}}</span>
+        <span class="missed">{{statistics.missed}}</span>
+      </div>
+    </div>
+    <div *ngIf="isList" class="stat-list">
+      <div *ngFor="let s of statistics.events"
+           [ngClass]="{'attended':s.type=='ATTENDED','unable':s.type=='UNABLE_TO_ATTEND','missed':s.type=='NOT_ATTENDED'}">
+        {{s.name}}
+      </div>
+    </div>
+  </div>
+</div>

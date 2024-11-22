@@ -1,0 +1,29 @@
+.expense {
+  color: red;
+}
+
+.active {
+  color: green;
+  border-color: green;
+}
+
+.payment-table {
+  font-size: 0.8em;
+  white-space: initial;
+}
+
+@media (min-width: 992px) {
+  .payment-table {
+    font-size: 1.1em;
+  }
+}
+
+.filter-input {
+  display: inline;
+}
+
+.filter-input > input {
+
+  display: inline;
+  width: 150px;
+}

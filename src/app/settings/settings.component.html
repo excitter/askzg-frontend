@@ -1,0 +1,47 @@
+<div>
+  <div class="clearfix">
+  <form class="form-style clearfix col-md-6" #changePasswordForm="ngForm" (submit)="changePassword()">
+    <div class="form-group">
+      <input type="password" class="text-field form-control" placeholder="Postojeća lozinka"
+             name="oldPassword" required [(ngModel)]="request.old">
+    </div>
+    <div class="form-group">
+      <input type="password" class="text-field form-control" placeholder="Nova lozinka"
+             name="newPassword" required [(ngModel)]="request.new">
+    </div>
+    <div class="form-group error" *ngIf="error">
+      Krivi password
+    </div>
+    <div class="form-group">
+      <img src="assets/images/theme_images/loader-form.GIF" *ngIf="passwordSaving">
+      <button type="submit" class="btn btn-sm btn-outline-inverse" *ngIf="!passwordSaving"
+              [disabled]="changePasswordForm.invalid">
+        Spremi
+      </button>
+    </div>
+  </form>
+  </div>
+  <div style="margin-top:20px" class="clearfix" *ngIf="user!=null">
+    <form class="form-style clearfix col-md-6" #changePageForm="ngForm" (submit)="changePage()">
+      <div class="form-group">
+        <select class="text-field form-control" name="type" [(ngModel)]="user.page" required>
+          <option value="MEMBERS">Članovi</option>
+          <option value="PAYMENTS">Financije</option>
+          <option value="EVENTS">Događaji</option>
+          <option value="REPORT">Izvješće</option>
+          <option value="STATISTICS">Statistika</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <img src="assets/images/theme_images/loader-form.GIF" *ngIf="pageSaving">
+        <button type="submit" class="btn btn-sm btn-outline-inverse" *ngIf="!pageSaving"
+                [disabled]="changePageForm.invalid">
+          Spremi
+        </button>
+      </div>
+    </form>
+
+  </div>
+
+</div>

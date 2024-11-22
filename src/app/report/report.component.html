@@ -1,0 +1,30 @@
+<div class="">
+  <a type="button" class="btn btn-outline-inverse btn-lg pull-right mb10" (click)="onExport()">
+    <span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span>
+  </a>
+  <app-year-pagination [currentYear]="currentYear" (yearChanged)="onYearChanged($event)" [maxYear]="maxYear"></app-year-pagination>
+  <img src="assets/images/theme_images/loader-form.GIF" *ngIf="reportMemberships==null"/>
+  <div id="membershipContainer" *ngIf="reportMemberships!=null" class="clearfix">
+    <h4>Članarine</h4>
+    <div *ngIf="reportMemberships.length==0">
+      Nema članova
+    </div>
+    <div *ngIf="reportMemberships.length>0">
+      <div class="mb10"> Dug : {{activeDebt}} € <span *ngIf="activeDebt!=totalDebt">({{totalDebt}} €)</span></div>
+      <div class="form-check mb10">
+        <button class="btn btn-outline-inverse" [ngClass]="filter.active ? 'active':''" (click)="filter.active=!filter.active;onFilterChanged()">
+          Samo trenutno aktivni
+        </button>
+      </div>
+      <app-report-membership *ngFor="let reportMembership of reportMemberships" [reportMembership]="reportMembership" [wantedYear]="currentYear" (debtChangedEvent)="onChangeDebt($event)">
+      </app-report-membership>
+    </div>
+  </div>
+  <div id="eventContainer" *ngIf="eventReport!=null" class="clearfix">
+    <h4>Događaji</h4>
+    <div *ngIf="eventReport.participations.length==0">
+      Nema događaja u ovoj godini
+    </div>
+    <app-event-report-table *ngIf="eventReport.participations.length>0" [eventReport]="eventReport"></app-event-report-table>
+  </div>
+</div>

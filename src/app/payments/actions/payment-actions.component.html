@@ -1,0 +1,18 @@
+<div>
+  <div *ngIf="state==0">
+    <button type="button" class="btn btn-outline-inverse" *ngIf="payment.canEdit" (click)="onEdit(payment.id)">
+      <span class="glyphicon glyphicon-wrench" aria-hidden="true"></span>
+    </button>
+    <button type="button" class="btn btn-outline-inverse" (click)="state=1">
+      <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+    </button>
+  </div>
+  <div *ngIf="state==1">
+    <button type="button" class="btn btn-outline-inverse" (click)="onDelete(payment.id)">
+      <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+    </button>
+    <button type="button" class="btn btn-outline-inverse" (click)="state=0">
+      <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+    </button>
+  </div>
+</div>

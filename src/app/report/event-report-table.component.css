@@ -1,0 +1,33 @@
+.participated {
+  border-color: green;
+}
+
+.not-participated {
+  border-color: red;
+}
+
+.options {
+  width: 100%;
+  cursor: pointer;
+  height: 120px;
+  line-height: 75px;
+  border-width: 2px;
+  border-radius: 4px;
+}
+
+.back-btn {
+  margin-bottom: 15px;
+}
+
+.name {
+  line-height: 25px;
+  white-space: initial;
+  font-size: 0.9em
+}
+
+.details {
+}
+
+.smaller{
+  font-size: 0.9em;
+}

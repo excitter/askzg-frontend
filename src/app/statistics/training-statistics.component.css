@@ -1,0 +1,42 @@
+.training-statistic {
+  width: 100%;
+  cursor: pointer;
+  height: 100px;
+  line-height: 75px;
+  border-width: 2px;
+  border-radius: 4px;
+  transition: none !important;
+  font-family: 'Exo', sans-serif;
+}
+
+.opened {
+  min-height: 100px;
+  height: auto !important;
+  padding: 0 !important;
+}
+
+.member-name {
+  font-size: 15px;
+  height: 25px;
+}
+
+.members {
+  height: auto;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  white-space: initial;
+  line-height: 40px;
+  padding: 5px;
+}
+
+.member-count {
+  font-size: 1.3em;
+}
+
+.event-date {
+  line-height: 20px;
+}
+
+.location{
+  font-size:0.6em;
+}

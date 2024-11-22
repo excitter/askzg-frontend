@@ -1,0 +1,13 @@
+<div class="clearfix year-paginator">
+  <button type="button" class="btn btn-lg btn-outline-inverse col-xs-4 col-sm-3 col-md-1"
+          [disabled]="currentYear==minYear" (click)="onYearChange(currentYear-1)">
+    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+  </button>
+  <div class="col-xs-4 col-sm-3 col-md-2 col-lg-1 year-text">
+    {{currentYear}}
+  </div>
+  <button type="button" class="btn btn-lg btn-outline-inverse col-xs-4 col-sm-3 col-md-1"
+          [disabled]="currentYear==maxYear" (click)="onYearChange(currentYear+1)">
+    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+  </button>
+</div>

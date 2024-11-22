@@ -1,0 +1,51 @@
+<div>
+  <div class="clearfix">
+    <h4>Kazne - {{member.name}}</h4>
+  </div>
+
+  <div>
+    <div>
+      <h5>Nova kazna</h5>
+
+      <div class="row no-margin">
+        <form class="form-style clearfix col-lg-4 col-md-6 col-xs-12" #refractionForm="ngForm" (submit)="onSave()" novalidate>
+          <div class="form-group">
+            <input type="text" class="text-field form-control" placeholder="Datum" name="date" [(ngModel)]="refraction.createdAt" appDateFormat required>
+          </div>
+          <div class="form-group">
+            <input type="text" class="text-field form-control" [(ngModel)]="refraction.comment" placeholder="Komentar" name="comment">
+          </div>
+          <div class="form-group">
+            <button type="submit" class="btn btn-sm btn-outline-inverse" [disabled]="refractionForm.invalid">
+              Spremi
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div style="margin-top: 25px">
+      <h5>Postojeće kazne</h5>
+      <table class="table app-table">
+        <thead>
+        <tr>
+          <th>Datum</th>
+          <th>Komentar</th>
+          <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let refraction of refractions">
+          <td>{{refraction.createdAt}}</td>
+          <td>{{refraction.comment}}</td>
+          <td>
+            <button type="button" class="btn btn-outline-inverse" (click)="onDelete(refraction.id)">
+              Izbriši
+            </button>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

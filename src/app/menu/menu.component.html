@@ -1,0 +1,48 @@
+<section id="left-sidebar">
+  <div class="logo hidden-xs">
+    <img src="assets/images/logo.png" alt="ASK Zagreb">
+  </div>
+  <div class="balance" *ngIf="userData.loggedIn" [ngClass]="{'minus':appData.balance<0}">
+    {{appData.balance | positive}} €
+  </div>
+
+  <!--<div id="mobile-menu-icon" class="visible-xs" (click)="toggleMainMenu()"><span-->
+  <!--class="glyphicon glyphicon-th"></span></div>-->
+  <!---->
+  <ul class="main-menu" *ngIf="userData.loggedIn">
+    <!--[ngClass]="showMenu ? '':'hidden-xs'">-->
+    <li class="menu-item col-xs-3 col-sm-12">
+      <a routerLink="/members" (click)="toggleMainMenu()">Članovi</a>
+    </li>
+    <li class="menu-item col-xs-3 col-sm-12">
+      <a routerLink="/payments" (click)="toggleMainMenu()">Financije</a>
+    </li>
+    <li class="menu-item col-xs-3 col-sm-12">
+      <a routerLink="/events" (click)="toggleMainMenu()">Događaji</a>
+    </li>
+    <li class="menu-item col-xs-3 col-sm-12">
+      <a routerLink="/reports" (click)="toggleMainMenu()">Izvješće</a>
+    </li>
+    <li class="menu-item col-xs-3 col-sm-12">
+      <a routerLink="/statistics" (click)="toggleMainMenu()">Statistika</a>
+    </li>
+    <li class="menu-item col-xs-3 col-sm-12">
+      <a routerLink="/refractions" (click)="toggleMainMenu()">Kazne</a>
+    </li>
+    <li class="menu-item col-xs-3 col-sm-12">
+      <a routerLink="/products" (click)="toggleMainMenu()">Oprema</a>
+    </li>
+    <li class="menu-item col-xs-3 col-sm-12">
+      <a routerLink="/settings" (click)="toggleMainMenu()">Postavke</a>
+    </li>
+    <li class="menu-item col-xs-3 col-sm-12" *ngIf="userData.role == 'ADMIN'">
+      <a routerLink="/users" (click)="toggleMainMenu()">Korisnici</a>
+    </li>
+    <li class="menu-item col-xs-3 col-sm-12" *ngIf="userData.role == 'ADMIN'">
+      <a routerLink="/admin" (click)="toggleMainMenu()">Admin</a>
+    </li>
+    <li class="menu-item col-xs-12 logout">
+      <div class="menu-link" (click)="doLogout()">Logout</div>
+    </li>
+  </ul>
+</section>

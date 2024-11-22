@@ -1,0 +1,29 @@
+<div>
+  <div class="mb20">
+    <button type="button" class="btn btn-outline-inverse btn-lg" [routerLink]="['/events/new']">
+      <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+    </button>
+    <button type="button" class="btn btn-outline-inverse btn-lg pull-right" (click)="onExport()">
+      <span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span>
+    </button>
+  </div>
+  <app-year-pagination (yearChanged)="onYearChanged($event)" [currentYear]="currentYear" [minYear]="2014"></app-year-pagination>
+  <div class="form-check mb10">
+    <button class="btn btn-outline-inverse" [ngClass]="filter.training ? 'active':''" (click)="filter.training = !filter.training;onFilterChanged()">
+      Treninzi
+    </button>
+    <button class="btn btn-outline-inverse" [ngClass]="filter.event ? 'active':''" (click)="filter.event = !filter.event;onFilterChanged()">
+      Susreti
+    </button>
+    <button class="btn btn-outline-inverse" [ngClass]="filter.other ? 'active':''" (click)="filter.other = !filter.other;onFilterChanged()">
+      Ostalo
+    </button>
+    <div *ngIf="events!=null" class="count-icon">
+      <span class="glyphicon glyphicon-align-justify" aria-hidden="true"></span>
+      {{events.length}}
+    </div>
+  </div>
+  <div>
+    <app-event *ngFor="let event of events" [event]="event" (eventDeleted)="onEventDeleted($event)"></app-event>
+  </div>
+</div>

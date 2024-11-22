@@ -1,0 +1,38 @@
+.greater {
+  color: green;
+}
+
+.simple-table, .simple-table thead tr th, .compare-table, .compare-table thead tr th {
+  text-align: center;
+}
+
+.compare-table {
+  font-size: 0.65em !important;
+}
+
+/* Extra Small Devices, Phones */
+@media only screen and (min-width: 480px) {
+  .compare-table {
+    font-size: 0.75em !important;
+  }
+}
+
+/* Medium Devices, Desktops */
+@media only screen and (min-width: 992px) {
+  .compare-table {
+    font-size: 1.1em !important;
+  }
+}
+
+.simple-table tbody tr td:nth-child(2), .simple-table thead tr th:nth-child(2), .compare-table thead tr:first-child th:nth-child(2) {
+  border-right: 1px solid whitesmoke;
+  border-left: 1px solid whitesmoke;
+}
+
+.compare-table thead tr:nth-child(2) th:nth-child(2), .compare-table thead tr:nth-child(2) th:nth-child(4), .compare-table tbody tr td:nth-child(2), .compare-table tbody tr td:nth-child(4) {
+  border-left: 1px solid whitesmoke;
+}
+
+.simple-table tbody tr:last-child td, .compare-table tbody tr:last-child td {
+  border-top: 1px solid whitesmoke;
+}

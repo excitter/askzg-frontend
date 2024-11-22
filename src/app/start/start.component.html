@@ -1,0 +1,8 @@
+<div style="margin-top:20px">
+  <div *ngIf="!serverSleeping">
+    <img src="assets/images/theme_images/loader-form.GIF" alt="checking..."/>
+  </div>
+  <div *ngIf="serverSleeping">
+    Server nije aktivan. Pokušaj za 30ak sekundi.
+  </div>
+</div>

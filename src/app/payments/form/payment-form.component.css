@@ -1,0 +1,21 @@
+.plus-minus {
+  float: left;
+  height: 34px;
+  line-height: 20px;
+  width: 10%;
+  border-right: none;
+  padding: 6px;
+}
+
+.amount {
+  float: left;
+  width: 90%;
+}
+
+@media (min-width: 992px) {
+  .plus-minus {
+    height: 54px !important;
+    font-size: 0.97em;
+    line-height: 45px;
+  }
+}

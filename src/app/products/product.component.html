@@ -1,0 +1,40 @@
+<div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 mb10">
+  <div class="btn btn-lg btn-outline-inverse options" [ngClass]="product.paid?'paid':''">
+    <div *ngIf="state==0">
+      <div class="name">
+        {{product.name}}
+      </div>
+      <div class="price" *ngIf="!product.paid">
+        {{product.price - product.paidAmount}} € ({{product.price}} €)
+      </div>
+      <div class="price" *ngIf="product.paid">
+        {{product.price}} €
+      </div>
+      <div class="actions">
+        <a type="button" class="btn btn-outline-inverse action-btn" *ngIf="!product.paid"
+           [routerLink]="['/products', product.id, 'pay']">
+          <span class="glyphicon glyphicon-usd" aria-hidden="true"></span>
+        </a>
+        <a type="button" class="btn btn-outline-inverse action-btn" *ngIf="!product.paid" [routerLink]="['/products', product.id, 'edit']">
+          <span class="glyphicon glyphicon-wrench" aria-hidden="true"></span>
+        </a>
+        <div class="btn btn-outline-inverse action-btn" (click)="state=1" *ngIf="!product.paid">
+          <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="state==1">
+    <div class="confirmation col-xs-12">
+      <div class="btn btn-outline-inverse action-btn col-xs-6" (click)="onDelete()">
+        <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+      </div>
+      <div class="btn btn-outline-inverse action-btn col-xs-6" (click)="state=0">
+        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+      </div>
+    </div>
+  </div>
+  <div class="btn btn-lg options-container options" *ngIf="state==2">
+    <img src="assets/images/theme_images/loader-form.GIF"/>
+  </div>
+</div>

@@ -1,0 +1,20 @@
+<div>
+  <table class="table app-table">
+    <thead>
+    <tr>
+      <th>Član</th>
+      <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let member of members">
+      <td>{{member.name}}</td>
+      <td>
+        <button type="button" class="btn btn-outline-inverse" (click)="onDeleteLastMembership(member.id)" [disabled]="!deleteEnabled">
+          Oprosti zadnju neplaćenu članarinu
+        </button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>

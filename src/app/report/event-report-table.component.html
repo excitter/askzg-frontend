@@ -1,0 +1,39 @@
+<div class="clearfix">
+  <div *ngIf="participation==null">
+    <div *ngFor="let participation of eventReport.participations">
+      <div class="col-xs-12 col-sm-6 mb10 clearfix"
+           (click)="onOpenEventParticipation(participation)">
+        <div class="btn btn-lg btn-outline-inverse options">
+          <div class="name hidden-sm">
+            {{participation.event.name}}
+          </div>
+          <div class="name visible-sm">
+            {{participation.event.name | shortEventName}}
+          </div>
+          <div class="details">
+            {{participation.paidMemberIds.length}}/{{participation.unpaidMemberIds.length + participation.paidMemberIds.length}}
+            ({{participation.paidMemberIds.length*participation.event.price}}/{{(participation.unpaidMemberIds.length + participation.paidMemberIds.length)*participation.event.price}} €)
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="participation!=null">
+    <div class="row">
+      <div class="col-xs-12 col-sm-4 col-md-2 clearfix back-btn mb10" (click)="participation=null">
+        <div class="btn btn-lg btn-outline-inverse">
+          <span class="glyphicon glyphicon-chevron-up" aria-hidden="true"></span>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div *ngFor="let member of participation.participationMembers" class="col-xs-4 col-sm-3 col-md-2 mb10"
+           (click)="toggleMemberPaid(member.id)">
+        <div class="btn btn-lg btn-outline-inverse" style="width: 100%;font-size: 0.8em;"
+             [ngClass]="participation.unpaidMemberIds.indexOf(member.id)!=-1?'not-participated':'participated'">
+          {{member.name}}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

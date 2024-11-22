@@ -1,0 +1,43 @@
+.member-statistic {
+  width: 100%;
+  cursor: pointer !important;
+  min-height: 130px;
+  line-height: 75px;
+  border-width: 2px;
+  border-radius: 4px;
+  transition: all 0.4s;
+  font-family: 'Exo', sans-serif;
+  padding: 0 !important;
+}
+
+.counts {
+  line-height: 35px;
+}
+
+.name {
+  line-height: 60px;
+  font-size: 1.1em;
+}
+
+.percentage {
+  line-height: 25px;
+}
+
+.attended {
+  color: green;
+  margin-right: 5px;
+}
+
+.unable {
+  color: yellow;
+  margin-right: 5px;
+}
+
+.missed {
+  color: red;
+}
+
+.stat-list {
+  line-height: 1.3em;
+  font-size: 0.7em;
+}

@@ -1,0 +1,34 @@
+.page-text {
+  text-align: center;
+  line-height: 55px;
+}
+
+.left-arrow-1 {
+  /*margin-left: -5px;*/
+}
+
+.left-arrow-2 {
+  margin-left: -12px;
+}
+
+.right-arrow-1 {
+  margin-right: -12px;
+}
+
+.right-arrow-2 {
+
+}
+
+@media (max-width: 768px) {
+  .page-text {
+    font-size: 0.8em;
+  }
+
+  .left-arrow-1 {
+    margin-left: -5px;
+  }
+
+  .right-arrow-2 {
+    margin-right: -5px;
+  }
+}

@@ -1,0 +1,45 @@
+<div>
+  <div class="mb20">
+    <button class="btn btn-outline-inverse btn-lg" [routerLink]="['/members/new']">
+      <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+    </button>
+    <button type="button" class="btn btn-outline-inverse btn-lg pull-right" (click)="onExport()">
+      <span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span>
+    </button>
+  </div>
+  <div class="form-check mb10">
+    <button class="btn btn-outline-inverse" [ngClass]="filter.member ? 'active' : ''" (click)="filter.member=!filter.member;onFilterChanged()">
+      Član
+    </button>
+    <button class="btn btn-outline-inverse" [ngClass]="filter.recruit ? 'active' : ''" (click)="filter.recruit=!filter.recruit;onFilterChanged()">
+      Regrut
+    </button>
+    <button class="btn btn-outline-inverse" [ngClass]="filter.inactive ? 'active' : ''" (click)="filter.inactive=!filter.inactive;onFilterChanged()">
+      Nije u klubu
+    </button>
+    <div *ngIf="members!=null" class="count-icon">
+      <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+      {{members.length}}
+    </div>
+  </div>
+  <div>
+    <div *ngFor="let member of members" class="col-xs-6 col-sm-3 col-md-2 mb10 option-container">
+      <div class="btn btn-lg btn-outline-inverse option">
+        <div class="name col-xs-12">
+          {{member.name}}
+        </div>
+        <div class="details col-xs-12">
+          {{member.status | memberStatusToText}}<span *ngIf="member.status!='INACTIVE'"> {{member.membership}} €</span>
+        </div>
+        <div class="row">
+          <a type="button" class="btn btn-lg btn-outline-inverse edit-btn col-xs-6" [routerLink]="['/members', member.id, 'edit']">
+            <span class="glyphicon glyphicon-wrench" aria-hidden="true"></span>
+          </a>
+          <a type="button" class="btn btn-lg btn-outline-inverse edit-btn col-xs-6" [routerLink]="['/members', member.id, 'stats']">
+            <span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

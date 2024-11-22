@@ -1,0 +1,15 @@
+.option {
+  cursor: pointer;
+  width: 100%;
+  font-size: 0.9em;
+}
+
+.attending {
+  color: green;
+  border: 1px solid green;
+}
+
+.unable {
+  color: yellow;
+  border: 1px solid yellow;
+}

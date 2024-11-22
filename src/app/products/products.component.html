@@ -1,0 +1,17 @@
+<div>
+  <a type="button" class="btn btn-outline-inverse btn-lg" [routerLink]="['/products/new']"
+     style="margin-bottom: 20px">
+    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+  </a>
+  <div class="form-check mb10">
+    <button class="btn btn-outline-inverse" *ngIf="hidePaid" (click)="hidePaid=false;filterProducts()">
+      Prikaži plaćene
+    </button>
+    <button class="btn btn-outline-inverse" *ngIf="!hidePaid" (click)="hidePaid=true;filterProducts()">
+      Sakrij plaćene
+    </button>
+  </div>
+  <div class="clearfix">
+    <app-gear *ngFor="let product of products" [product]="product" (togglePayEvent)="onTogglePaid($event)" (deleteEvent)="onDelete($event)"></app-gear>
+  </div>
+</div>

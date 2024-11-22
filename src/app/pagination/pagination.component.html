@@ -1,0 +1,23 @@
+<div class="clearfix">
+  <button type="button" class="btn btn-lg btn-outline-inverse col-xs-2 col-lg-1"
+          [disabled]="page==1" (click)="onPageChanged(1)">
+    <span class="glyphicon glyphicon-chevron-left left-arrow-1" aria-hidden="true"></span>
+    <span class="glyphicon glyphicon-chevron-left left-arrow-2" aria-hidden="true"></span>
+  </button>
+  <button type="button" class="btn btn-lg btn-outline-inverse col-xs-2 col-lg-1"
+          [disabled]="page==1" (click)="onPageChanged(page-1)">
+    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+  </button>
+  <div class="col-xs-3 col-lg-1 page-text">
+    {{page}} / {{numberOfPages}}
+  </div>
+  <button type="button" class="btn btn-lg btn-outline-inverse col-xs-2 col-lg-1"
+          [disabled]="page==numberOfPages" (click)="onPageChanged(page+1)">
+    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+  </button>
+  <button type="button" class="btn btn-lg btn-outline-inverse col-xs-2 col-lg-1"
+          [disabled]="page==numberOfPages" (click)="onPageChanged(numberOfPages)">
+    <span class="glyphicon glyphicon-chevron-right right-arrow-1" aria-hidden="true"></span>
+    <span class="glyphicon glyphicon-chevron-right right-arrow-2" aria-hidden="true"></span>
+  </button>
+</div>

@@ -1,0 +1,83 @@
+.ok > div {
+  border: 1px solid white;
+}
+
+.name {
+  font-size: 1.2em !important;
+  line-height: 45px;
+}
+
+.danger > div {
+  border: 2px solid red !important;
+}
+
+.super > div {
+  border: 2px solid green !important;
+}
+
+.ok-sign {
+  line-height: 45px;
+  color: green;
+}
+
+.options {
+  width: 100%;
+  cursor: pointer;
+  height: 140px;
+  line-height: 60px;
+  border-width: 2px;
+  border-radius: 4px;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.debt-amount {
+  font-size: 0.9em;
+  line-height: 40px;
+}
+
+.option,
+.option:hover,
+.option:focus,
+.option:active {
+  transition: all 0.4s;
+  border-radius: 0;
+  font-family: 'Exo', sans-serif;
+}
+
+.only-option {
+  line-height: 115px;
+}
+
+.options-container {
+  color: #fff;
+  background-color: transparent;
+  border-color: #fff;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+.pay-action {
+  padding: 0;
+}
+
+.months {
+  font-size: 0.7em;
+  line-height: 20px;
+  word-break: break-all;
+  white-space: normal;
+}
+
+.copying {
+  color: green;
+}
+
+.owed {
+  color: red;
+}
+
+@media (min-width: 768px) {
+  .months {
+    font-size: 0.8em;
+  }
+}

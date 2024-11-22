@@ -1,0 +1,62 @@
+.name {
+  line-height: 25px;
+  font-size: 1.1em !important;
+  white-space: initial;
+}
+
+.options {
+  width: 100%;
+  cursor: pointer;
+  height: 130px;
+  line-height: 105px;
+  border-width: 2px;
+  border-radius: 4px;
+}
+
+.option,
+.option:hover,
+.option:focus,
+.option:active {
+  transition: all 0.4s;
+  border-radius: 0;
+  font-family: 'Exo', sans-serif;
+}
+
+.options-container {
+  color: #fff;
+  background-color: transparent;
+  border-color: #fff;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+.pay-action {
+  padding: 0;
+}
+
+.price {
+  font-size: 0.8em;
+  line-height: 40px;
+  word-break: break-all;
+}
+
+.paid {
+  border-color: green;
+}
+
+.actions {
+  line-height: 35px;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+.action-btn {
+  border: none;
+}
+
+.confirmation {
+  margin-top: -75px;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+  text-align: center;
+}
