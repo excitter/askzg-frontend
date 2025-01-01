@@ -7,7 +7,7 @@ RUN npm install -g @angular/cli@12.2.7
 COPY . .
 
 RUN npm install
-RUN ng build
+RUN ng build --configuration=production
 
 FROM nginx:1.27.2-alpine
 COPY --from=builder /app/dist /content
