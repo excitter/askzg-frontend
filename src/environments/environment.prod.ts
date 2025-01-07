@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiHost: 'https://askzg-api.herokuapp.com'
+  apiHost: 'https://ejrsoftkz.ddns.net:20251'
 };
