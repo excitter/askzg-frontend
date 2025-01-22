@@ -27,12 +27,12 @@
     <input type="text" class="text-field form-control" placeholder="Datum" name="date" [(ngModel)]="event.date" appDateFormat required (change)="onDateChanged()">
   </div>
 
-  <div class="form-group" *ngIf="event.type=='EVENT'">
+  <div class="form-group">
     <input type="number" class="text-field form-control" placeholder="Cijena" name="price" [(ngModel)]="event.price" required>
   </div>
 
 
-  <div class="form-group clearfix" *ngIf="event.type=='TRAINING' || event.type=='EVENT'">
+  <div class="form-group clearfix">
     <div *ngFor="let member of members">
       <app-event-participation [member]="member" [event]="event"></app-event-participation>
     </div>
