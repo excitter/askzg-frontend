@@ -19,8 +19,13 @@
   </div>
 
   <div class="form-group">
-    <input type="text" class="text-field form-control" [placeholder]="event.type=='TRAINING'?'Lokacija':'Ime'" name="name"
+    <input type="text" class="text-field form-control" placeholder="Ime" name="name"
            [(ngModel)]="event.name" required>
+  </div>
+
+  <div class="form-group">
+    <input type="text" class="text-field form-control" placeholder="Lokacija" name="location"
+           [(ngModel)]="event.location">
   </div>
 
   <div class="form-group">
