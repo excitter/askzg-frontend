@@ -6,6 +6,7 @@ export class Event {
   location: string;
   type: string;
   date: string;
+  endDate: string;
   price: number;
   participation: EventParticipation[];
 }

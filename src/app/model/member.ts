@@ -5,6 +5,7 @@ export class Member {
   firstName: string;
   lastName: string;
   oib: string;
+  idCardNumber: string;
   membership: number;
   date: string;
   dateOfBirth: string;

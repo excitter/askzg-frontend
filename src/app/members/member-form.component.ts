@@ -31,6 +31,7 @@ export class MemberFormComponent implements OnInit, OnDestroy {
         this.periods = [];
         this.member.date = currentDate();
         this.member.membership = 100;
+        this.member.idCardNumber = "";
       } else {
         this.memberService.getMember(id).then(
           (member) => {
