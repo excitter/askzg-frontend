@@ -9,4 +9,8 @@ export class Event {
   endDate: string;
   price: number;
   participation: EventParticipation[];
+
+  constructor() {
+    this.participation = [];
+  }
 }
