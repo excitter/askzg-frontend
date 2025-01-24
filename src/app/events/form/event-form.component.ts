@@ -35,6 +35,7 @@ export class EventFormComponent implements OnInit, OnDestroy {
         const e = new Event();
         e.type = 'TRAINING';
         e.date = currentDate();
+        e.endDate = currentDate();
         e.participation = [];
         this.memberService.getMembersByAttendDate(e.date).then(
           (members) => {
