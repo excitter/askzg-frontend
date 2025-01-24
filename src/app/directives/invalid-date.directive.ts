@@ -13,6 +13,7 @@ const maxDays = (month, year) => {
 };
 
 export function validateDate(control: FormControl) {
+  if (control.value == null || control.value == "") return false;
   if (!control.value) {
     return {'invalidDate': {value: control.value}};
   }
