@@ -19,7 +19,7 @@ export class TitleService {
     this.titles.push(new TitleData(/members/, 'Članovi'));
     this.titles.push(new TitleData(/payments/, 'Financije'));
     this.titles.push(new TitleData(/events/, 'Događaji'));
-    this.titles.push(new TitleData(/reports/, 'Izvješće'));
+    this.titles.push(new TitleData(/reports/, 'Dugovanja'));
     this.titles.push(new TitleData(/statistics/, 'Statistika'));
     this.titles.push(new TitleData(/users/, 'Korisnici'));
     this.titles.push(new TitleData(/settings/, 'Postavke'));
