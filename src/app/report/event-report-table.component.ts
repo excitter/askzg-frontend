@@ -1,6 +1,8 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {EventParticipation, EventReport} from '../model/report-event';
 import {EventsService} from '../service/events.service';
+import { AppDataService } from '../service/app-data.service';
+import {Event} from '../model/event';
 
 @Component({
   selector: 'app-event-report-table',
@@ -10,10 +12,11 @@ import {EventsService} from '../service/events.service';
 export class EventReportTableComponent implements OnInit {
 
   @Input() eventReport: EventReport;
+  @Output() eventDebtChangedEvent = new EventEmitter<Event>();
   participation: EventParticipation = null;
   loading = false;
 
-  constructor(private eventService: EventsService) {
+  constructor(private eventService: EventsService, private appDataService: AppDataService) {
   }
 
   ngOnInit() {
@@ -39,10 +42,22 @@ export class EventReportTableComponent implements OnInit {
           this.participation.paidMemberIds.push(memberId);
         }
         this.loading = false;
+        this.appDataService.reloadBalance();
+        if (this.eventDebtChangedEvent !== null) {
+          this.eventDebtChangedEvent.emit(this.participation.event);
+        }
       },
       () => {
         this.loading = false;
+        this.appDataService.reloadBalance();
       }
     );
+  }
+
+  calculateParticipationClass(participation) {
+    if (participation.unpaidMemberIds.length > 0) {
+      return 'danger';
+    }
+    return 'super';
   }
 }

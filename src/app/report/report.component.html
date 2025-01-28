@@ -25,6 +25,7 @@
     <div *ngIf="eventReport.participations.length==0">
       Nema događaja u ovoj godini
     </div>
-    <app-event-report-table *ngIf="eventReport.participations.length>0" [eventReport]="eventReport"></app-event-report-table>
+    <div *ngIf="eventReport.participations.length>0" class="mb10"> Dug : {{eventDebt}} €</div>
+    <app-event-report-table *ngIf="eventReport.participations.length>0" [eventReport]="eventReport" (eventDebtChangedEvent)="onEventChangeDebt($event)"></app-event-report-table>
   </div>
 </div>

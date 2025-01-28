@@ -2,6 +2,7 @@
   <div *ngIf="participation==null">
     <div *ngFor="let participation of eventReport.participations">
       <div class="col-xs-12 col-sm-6 mb10 clearfix"
+           [ngClass]="calculateParticipationClass(participation)"
            (click)="onOpenEventParticipation(participation)">
         <div class="btn btn-lg btn-outline-inverse options">
           <div class="name hidden-sm">

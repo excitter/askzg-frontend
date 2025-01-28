@@ -6,6 +6,14 @@
   border-color: red;
 }
 
+.danger > div {
+  border: 2px solid red !important;
+}
+
+.super > div {
+  border: 2px solid green !important;
+}
+
 .options {
   width: 100%;
   cursor: pointer;

@@ -9,6 +9,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {asParam, filterOf} from '../util/filter-util';
 import {Subscription} from 'rxjs';
 import {currentYear} from '../util/util-functions';
+import { eventDateNum } from '../model/event';
 
 @Component({
   selector: 'app-report',
@@ -22,6 +23,7 @@ export class ReportComponent implements OnInit {
   eventReport: EventReport = null;
   activeDebt = 0;
   totalDebt = 0;
+  eventDebt = 0;
   currentYear: number;
   maxYear = currentYear() + 1;
   filter: ReportFilter = new ReportFilter();
@@ -65,15 +67,29 @@ export class ReportComponent implements OnInit {
         this.filterReportMemberships();
       }
     );
+    this.loadEventReports(year);
+  }
+
+  loadEventReports(year) {
     this.reportService.getEventReport(year).then(
       (result) => {
+        this.eventDebt = 0;
+        result.participations = result.participations.filter(p => p.event.price).sort((a, b) => eventDateNum(b.event)- eventDateNum(a.event));
         this.eventReport = result;
+        for (let i=0; i<this.eventReport.participations.length; i++) {
+          const p = this.eventReport.participations[i];
+          this.eventDebt += p.event.price * p.unpaidMemberIds.length;
+        };
       }
     );
   }
 
   onChangeDebt() {
     this.filterReportMemberships();
+  }
+
+  onEventChangeDebt() {
+    this.loadEventReports(this.currentYear);
   }
 
   onFilterChanged() {
