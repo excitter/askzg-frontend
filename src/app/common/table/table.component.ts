@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, Input, OnInit } from "@angular/core";
+import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
 import { IDynamicTable, ITableHeader } from "./table.model";
 
 @Component({
@@ -8,9 +8,19 @@ import { IDynamicTable, ITableHeader } from "./table.model";
 })
 export class DynamicTableComponent implements OnInit {
 
-    @Input() data: IDynamicTable;
+    @Input() data: any[];
     @Input() headers: ITableHeader[];
+    @Output() headerClickEvent = new EventEmitter<ITableHeader>();
 
     ngOnInit() {}
+
+    headerClick(h) {
+        if (this.headerClickEvent != null)  this.headerClickEvent.emit(h);
+        var sortOrder = h.isAscending ? false : true;
+        h.isAscending = sortOrder;
+        var factor = sortOrder ? 1 : -1;
+        this.headers.filter(x => x.index != h.index).forEach(x => x.isAscending = null);
+        this.data.sort((a, b) => factor * (a[h.index] > b[h.index] ? 1 : -1) );
+    }
 
 }

@@ -1,7 +1,7 @@
 export interface ITableHeader {
     key: string;
     index: number;
-    isSelected: boolean;
+    isAscending?: boolean
 }
 
 export interface IDynamicTable {

@@ -36,10 +36,10 @@ export class StatisticsComponent implements OnInit {
     'Trening', '-', '?', '%', 'PP%',
     'Susret', '-', '?', '%', 'PP%',
     'Ostalo', '-', '?', '%', 'PP%',
-  ].map((x, i) => ({key: x, index: i, isSelected: true}) as ITableHeader);
+  ].map((x, i) => ({key: x, index: i}) as ITableHeader);
   eventHeaders = [
     'Datum', 'Događaj', 'Prisutni', 'Odsutni', 'Spriječeni', '%', 'PP%',
-  ].map((x, i) => ({key: x, index: i, isSelected: true}) as ITableHeader);
+  ].map((x, i) => ({key: x, index: i}) as ITableHeader);
   memberData = [];
   eventData = [];
   trainingData = [];
