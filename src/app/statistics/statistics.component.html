@@ -3,33 +3,45 @@
     <span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span>
   </a>
   <app-year-pagination (yearChanged)="onYearChanged($event)" [currentYear]="currentYear" [minYear]="2014"></app-year-pagination>
-  <img src="assets/images/theme_images/loader-form.GIF" *ngIf="loading1 || loading2"/>
+  <img src="assets/images/theme_images/loader-form.GIF" *ngIf="loading1"/>
 
-  <div id="membersContainer" class="clearfix">
-    <h4>Članovi na treninzima</h4>
-    <div *ngIf="!loading2 && memberStatistics.length==0">
+  <div id="statisticsV2MembersContainer" class="clearfix">
+    <h4>Statistika članova</h4>
+    <div *ngIf="!loading4 && statisticsV2.memberEventStatistics.length==0">
       Nema podataka
     </div>
-    <div *ngIf="!loading2 && memberStatistics.length>0">
-      <div class="form-check mb10">
-        <button class="btn btn-outline-inverse" [ngClass]="filter.active ? 'active':''" (click)="filter.active=!filter.active;onFilterChanged()">
-          Samo trenutno aktivni
-        </button>
-      </div>
-      <app-member-statistics *ngFor="let stat of memberStatistics" [statistics]="stat" [year]="currentYear"></app-member-statistics>
+    <div *ngIf="!loading4 && statisticsV2.memberEventStatistics.length>0">
+      <app-table [headers]="memberHeaders" [data]="memberData"></app-table>
     </div>
   </div>
 
-  <div id="trainingTimeContainer" class="clearfix">
-    <h4>Treninzi</h4>
-    <div *ngIf="!loading1 && trainingTimeStatistics.length==0">
+  <div id="statisticsV2MembersContainer" class="clearfix">
+    <h4>Statistika treninga</h4>
+    <div *ngIf="!loading4 && trainingData.length==0">
       Nema podataka
     </div>
-    <div *ngIf="!loading1 && trainingTimeStatistics.length>0">
-      <div class="average">
-        Broj treninga: {{trainingTimeStatistics.length}}. Prosjek: {{average}}
-      </div>
-      <app-training-statistics *ngFor="let stat of trainingTimeStatistics" [statistics]="stat"></app-training-statistics>
+    <div *ngIf="!loading4 && trainingData.length>0">
+      <app-table [headers]="eventHeaders" [data]="trainingData"></app-table>
+    </div>
+  </div>
+
+  <div id="statisticsV2MembersContainer" class="clearfix">
+    <h4>Statistika susreta</h4>
+    <div *ngIf="!loading4 && eventData.length==0">
+      Nema podataka
+    </div>
+    <div *ngIf="!loading4 && eventData.length>0">
+      <app-table [headers]="eventHeaders" [data]="eventData"></app-table>
+    </div>
+  </div>
+
+  <div id="statisticsV2MembersContainer" class="clearfix">
+    <h4>Statistika ostalo</h4>
+    <div *ngIf="!loading4 && otherData.length==0">
+      Nema podataka
+    </div>
+    <div *ngIf="!loading4 && otherData.length>0">
+      <app-table [headers]="eventHeaders" [data]="otherData"></app-table>
     </div>
   </div>
 

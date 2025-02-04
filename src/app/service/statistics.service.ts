@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {MemberStatistics, MonthlyTrainingStatistics, TrainingTimeStatistics} from '../model/statistics';
+import {MemberStatistics, MonthlyTrainingStatistics, StatisticsV2, TrainingTimeStatistics} from '../model/statistics';
 import {MemberTotalStatistics} from '../model/member-total-statistics';
 
 @Injectable()
@@ -33,6 +33,13 @@ export class StatisticsService {
   getMemberTotalStatistics(id: number): Promise<MemberTotalStatistics> {
     return this.http.get('/statistics/total/member/' + id).toPromise().then(
       (response) => response as MemberTotalStatistics,
+      (error) => Promise.reject(error.message)
+    );
+  }
+
+  getStatisticsV2(year: number): Promise<StatisticsV2> {
+    return this.http.get('/statistics/total/statisticsV2?year=' + year).toPromise().then(
+      (response) => response as StatisticsV2,
       (error) => Promise.reject(error.message)
     );
   }

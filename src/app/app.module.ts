@@ -66,6 +66,7 @@ import {AdminFormComponent} from './admin/admin-form/admin-form.component';
 import {RefractionService} from './service/refraction.service';
 import {RefractionsComponent} from './refractions/refractions.component';
 import {RefractionDetailsComponent} from './refractions/details/refraction-details.component';
+import { DynamicTableComponent } from './common/table/table.component';
 
 @NgModule({
   declarations: [
@@ -88,7 +89,8 @@ import {RefractionDetailsComponent} from './refractions/details/refraction-detai
     ProductsFormComponent,
     StatisticsComponent, TrainingStatisticsComponent, MemberStatisticsComponent, EventComponent,
     ProductComponent, PaymentActionsComponent, MonthlyStatisticsComponent,
-    AdminFormComponent
+    AdminFormComponent,
+    DynamicTableComponent
   ],
   imports: [
     BrowserModule, AppRoutingModule, FormsModule, HttpClientModule, ReactiveFormsModule, ClipboardModule, ChartModule

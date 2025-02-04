@@ -1,0 +1,17 @@
+<table class="table">
+    <thead>
+        <tr>
+            <th *ngFor="let x of headers">
+                {{x.key}}
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let row of data">
+            <td *ngFor="let h of headers">
+                {{ row[h.index] }}
+            </td>
+        </tr>
+    </tbody>
+
+</table>
