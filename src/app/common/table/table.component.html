@@ -1,8 +1,12 @@
 <table class="table">
     <thead>
         <tr>
-            <th *ngFor="let x of headers" (click)="headerClick(x)" class="clickable-header">
-                {{x.key}}
+            <th *ngFor="let x of headers" (click)="headerClick(x)">
+                <span class="btn">
+                    {{ x.key }}
+                    <span *ngIf="x.isAscending === true" class="glyphicon glyphicon glyphicon-sort-by-attributes"></span>
+                    <span *ngIf="x.isAscending === false" class="glyphicon glyphicon glyphicon-sort-by-attributes-alt"></span>
+                </span>
             </th>
         </tr>
     </thead>
