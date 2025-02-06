@@ -27,7 +27,7 @@ export class StatisticsComponent implements OnInit {
   allMemberStatistics: MemberStatistics[] = [];
   monthlyTrainingStatistics: MonthlyTrainingStatistics[] = [];
   currentYear: number;
-  loading1 = false;
+  loading3 = false;
   loading4 = false;
   average: string;
   statisticsV2: StatisticsV2 = null;
@@ -134,8 +134,8 @@ export class StatisticsComponent implements OnInit {
   }
 
   private loadStatistics(year: number) {
-    this.loading1 = true;
     this.loading4 = true;
+    this.loading3 = true;
     this.statisticsService.getStatisticsV2(year).then(
       (response) => {
         this.statisticsV2 = response;
@@ -145,22 +145,11 @@ export class StatisticsComponent implements OnInit {
       },
       () => this.loading4 = false,
     )
-    this.statisticsService.getTrainingTimeStatistics(year).then(
-      (response) => {
-        if (response.length === 0) {
-          this.average = '-';
-        } else {
-          let sum = 0;
-          response.forEach(s => {
-            sum = sum + s.members.length;
-          });
-          this.average = Number(sum / response.length).toFixed(1);
-        }
-        this.trainingTimeStatistics = response;
-        this.loading1 = false;
-      },
-      () => this.loading1 = false
-    );
+    this.statisticsService.getMonthlyTrainingStatistics(year).then((response) => {
+      this.monthlyTrainingStatistics = response;
+      this.loading3 = false;
+    },
+    () => this.loading3 = false);
   }
 
   onFilterChanged() {

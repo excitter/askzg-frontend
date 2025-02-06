@@ -3,7 +3,7 @@
     <span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span>
   </a>
   <app-year-pagination (yearChanged)="onYearChanged($event)" [currentYear]="currentYear" [minYear]="2014"></app-year-pagination>
-  <img src="assets/images/theme_images/loader-form.GIF" *ngIf="loading1"/>
+  <img src="assets/images/theme_images/loader-form.GIF" *ngIf="loading3 || loading4"/>
 
   <div id="statisticsV2MembersContainer" class="clearfix">
     <h4>Statistika članova</h4>
@@ -47,10 +47,10 @@
 
   <div id="monthlyTrainingContainer" class="clearfix">
     <h4>Po mjesecima</h4>
-    <div *ngIf="!loading1 && monthlyTrainingStatistics.length==0">
+    <div *ngIf="!loading3 && monthlyTrainingStatistics.length==0">
       Nema podataka
     </div>
-    <div *ngIf="!loading1 && monthlyTrainingStatistics.length>0">
+    <div *ngIf="!loading3 && monthlyTrainingStatistics.length>0">
       <app-monthly-statistics [monthlyStatistics]="monthlyTrainingStatistics"></app-monthly-statistics>
     </div>
   </div>
