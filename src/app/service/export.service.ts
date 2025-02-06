@@ -27,7 +27,7 @@ export class ExportService {
   }
 
   getStatistics(year: number, onlyActive: boolean): Observable<Blob> {
-    return this.http.get('/export/statistics?year=' + year + '&onlyActive=' + onlyActive, {responseType: 'blob'});
+    return this.http.get('/export/statisticsV2?year=' + year, {responseType: 'blob'});
   }
 
   getRefractions(onlyActive: boolean): Observable<Blob> {
