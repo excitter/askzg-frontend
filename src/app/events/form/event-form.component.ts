@@ -6,6 +6,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {MembersService} from '../../service/members.service';
 import {currentDate} from '../../util/util-functions';
 import {Location} from '@angular/common';
+import {AppDataService} from '../../service/app-data.service';
 
 @Component({
   selector: 'app-event-form',
@@ -22,7 +23,7 @@ export class EventFormComponent implements OnInit, OnDestroy {
   error = false;
 
   constructor(private eventsService: EventsService, private memberService: MembersService,
-              private route: ActivatedRoute, private router: Router, private location: Location) {
+              private appDataService: AppDataService, private route: ActivatedRoute, private router: Router, private location: Location) {
   }
 
   ngOnInit() {
@@ -67,6 +68,7 @@ export class EventFormComponent implements OnInit, OnDestroy {
     this.event.participation = this.event.participation.filter(p => p.type !== '');
     this.eventsService.saveEvent(this.event).then(
       (result) => {
+        this.appDataService.reloadBalance();
         this.onBack();
       },
       (error) => {

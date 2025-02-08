@@ -8,6 +8,7 @@ import {downloadPdf} from '../util/pdf.util';
 import {EventFilter} from './event-filter';
 import {asParam, filterOf} from '../util/filter-util';
 import {Subscription} from 'rxjs';
+import { AppDataService } from '../service/app-data.service';
 
 @Component({
   selector: 'app-events',
@@ -22,7 +23,7 @@ export class EventsComponent implements OnInit, OnDestroy {
   filter: EventFilter = new EventFilter();
   private sub: Subscription;
 
-  constructor(private eventsService: EventsService, private exportService: ExportService,
+  constructor(private eventsService: EventsService, private exportService: ExportService, private appDataService: AppDataService,
               private router: Router, private eventDataHolder: EventDataHolder, private route: ActivatedRoute) {
   }
 
@@ -87,6 +88,7 @@ export class EventsComponent implements OnInit, OnDestroy {
   }
 
   onEventDeleted(id) {
+    this.appDataService.reloadBalance();
     this.allEvents = this.allEvents.filter(e => e.id !== id);
     this.filterEvents();
   }
