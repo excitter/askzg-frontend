@@ -22,3 +22,11 @@ export function eventDateNum(event) {
     const iyear = parseInt(year, 10);
     return (new Date(iyear, imonth, iday)).getTime();
 }
+
+export function dateCompare(a, b) {
+  var aNum = eventDateNum(a);
+  var bNum = eventDateNum(b);
+  var dateComp = bNum - aNum;
+  if (dateComp != 0 ) return dateComp;
+  return a.name.localeCompare(b.name)
+}

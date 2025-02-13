@@ -1,6 +1,6 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {EventsService} from '../service/events.service';
-import {Event} from '../model/event';
+import {dateCompare, Event} from '../model/event';
 import {ActivatedRoute, Router} from '@angular/router';
 import {EventDataHolder} from './event-data-holder';
 import {ExportService} from '../service/export.service';
@@ -66,7 +66,7 @@ export class EventsComponent implements OnInit, OnDestroy {
   loadEvents(year) {
     this.eventsService.getEvents(year).then(
       (events) => {
-        this.allEvents = events;
+        this.allEvents = events.sort(dateCompare);
         this.filterEvents();
       }
     );
