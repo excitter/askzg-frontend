@@ -1,4 +1,4 @@
-<table class="table">
+<table class="table table-bordered generic-table">
     <thead>
         <tr>
             <th *ngFor="let x of headers" (click)="headerClick(x)">
@@ -11,8 +11,8 @@
         </tr>
     </thead>
     <tbody>
-        <tr *ngFor="let row of data">
-            <td *ngFor="let h of headers">
+        <tr *ngFor="let row of data" class="generic-table-row">
+            <td *ngFor="let h of headers" class="lol">
                 {{ row[h.index] }}
             </td>
         </tr>

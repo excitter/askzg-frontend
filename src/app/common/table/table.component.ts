@@ -20,7 +20,7 @@ export class DynamicTableComponent implements OnInit {
         h.isAscending = sortOrder;
         var factor = sortOrder ? 1 : -1;
         this.headers.filter(x => x.index != h.index).forEach(x => x.isAscending = null);
-        this.data.sort((a, b) => factor * (a[h.index] > b[h.index] ? 1 : -1) );
+        this.data.sort((a, b) => factor * (a[h.index] >= b[h.index] ? 1 : -1) );
     }
 
 }

@@ -33,12 +33,12 @@ export class StatisticsComponent implements OnInit {
   statisticsV2: StatisticsV2 = null;
   memberHeaders = [
     'Član', 
-    'Trening', '-', '?', '%', 'PP%',
-    'Susret', '-', '?', '%', 'PP%',
-    'Ostalo', '-', '?', '%', 'PP%',
+    'Trening', '-', '?', 'Prisutnost%',  // Prisutnost is adjustedPct
+    'Susret', '-', 'Prisutnost%',  // Prisutnost is totalPct
+    'Ostalo', '-', '?', 'Prisutnost%',  // Prisutnost is adjustedPct
   ].map((x, i) => ({key: x, index: i}) as ITableHeader);
   eventHeaders = [
-    'Datum', 'Događaj', 'Prisutni', 'Odsutni', 'Spriječeni', '%', 'PP%',
+    'Datum', 'Događaj', 'Prisutni', 'Odsutni', 'Spriječeni', 'Prisutnost%',
   ].map((x, i) => ({key: x, index: i}) as ITableHeader);
   memberData = [];
   eventData = [];
@@ -74,16 +74,16 @@ export class StatisticsComponent implements OnInit {
     var result = [];
     for (let i=0; i<breakdowns.length; ++i) {
       var current = breakdowns[i];
-      var attended = current.attendedPct;
+      // var attended = current.attendedPct;
       var adjusted = current.adjustedPct;
-      if (attended == adjusted) adjusted = null;
+      // if (attended == adjusted) adjusted = null;
       result.push([
         this.statisticsV2.events[current.eventId].date,
         this.statisticsV2.events[current.eventId].name,
         this.memberNames(current.attendedMemberIds).length,
         this.memberNames(current.missedMemberIds).length,
         this.memberNames(current.unableToAttendMemberIds).length,
-        attended,
+        // attended,
         adjusted,
         this.memberNames(current.attendedMemberIds).join(", "),
         this.memberNames(current.missedMemberIds).join(", "),
@@ -103,31 +103,31 @@ export class StatisticsComponent implements OnInit {
     this.memberData = [];
     for(let i=0; i<this.statisticsV2.memberEventStatistics.length; i++) {
       var current = this.statisticsV2.memberEventStatistics[i];
-      var trainingTotal = current.attendance["TRAINING"].totalPct;
+      // var trainingTotal = current.attendance["TRAINING"].totalPct;
       var trainingPossible = current.attendance["TRAINING"].possiblePct;
-      if (trainingTotal == trainingPossible) trainingPossible = null;
-      var eventTotal = current.attendance["EVENT"].totalPct;
+      // if (trainingTotal == trainingPossible) trainingPossible = null;
+      // var eventTotal = current.attendance["EVENT"].totalPct;
       var eventPossible = current.attendance["EVENT"].possiblePct;
-      if (eventTotal == eventPossible) eventPossible = null;
-      var otherTotal = current.attendance["OTHER"].totalPct;
+      // if (eventTotal == eventPossible) eventPossible = null;
+      // var otherTotal = current.attendance["OTHER"].totalPct;
       var otherPossible = current.attendance["OTHER"].possiblePct;
-      if (otherTotal == otherPossible) otherPossible = null;
+      // if (otherTotal == otherPossible) otherPossible = null;
       this.memberData.push([
         this.statisticsV2.members[current.memberId].name,
         current.attendance["TRAINING"].attended,
         current.attendance["TRAINING"].didntAttend,
         current.attendance["TRAINING"].couldntAttend,
-        trainingTotal,
+        // trainingTotal,
         trainingPossible,
         current.attendance["EVENT"].attended,
         current.attendance["EVENT"].didntAttend,
-        current.attendance["EVENT"].couldntAttend,
-        eventTotal,
+        // current.attendance["EVENT"].couldntAttend,
+        // eventTotal,
         eventPossible,
         current.attendance["OTHER"].attended,
         current.attendance["OTHER"].didntAttend,
         current.attendance["OTHER"].couldntAttend,
-        otherTotal,
+        // otherTotal,
         otherPossible,
       ]);
     }
