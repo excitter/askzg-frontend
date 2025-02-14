@@ -15,6 +15,9 @@
     <button class="btn btn-outline-inverse" [ngClass]="filter.expense ? 'active':''" (click)="filter.expense=!filter.expense;onFilterChanged()">
       Rashodi
     </button>
+    <button class="btn btn-outline-inverse" [ngClass]="filter.transient ? 'active':''" (click)="filter.transient=!filter.transient;onFilterChanged()">
+      Prikaži prolazne
+    </button>
     <div class="form-group filter-input">
       <input type="text" class="text-field form-control" style="height: 35px!important; border-left:1px solid white!important" [(ngModel)]="filter.text" (ngModelChange)="onFilterChanged()"/>
     </div>

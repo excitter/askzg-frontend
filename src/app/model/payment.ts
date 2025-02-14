@@ -6,6 +6,7 @@ export class Payment {
   comment: string;
   canEdit: boolean;
   balance: number;
+  transientExpense: boolean;
 }
 
 export class PaymentYearReport {

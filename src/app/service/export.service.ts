@@ -16,9 +16,9 @@ export class ExportService {
     return this.http.get('/export/events?year=' + year, {responseType: 'blob'});
   }
 
-  getPayments(year: number, income: boolean, expense: boolean, word: string): Observable<Blob> {
+  getPayments(year: number, income: boolean, expense: boolean, transient: boolean, word: string): Observable<Blob> {
     const ww = word === null ? '' : '&word=' + word;
-    const params = 'year=' + year + '&income=' + income + '&expense=' + expense + ww;
+    const params = 'year=' + year + '&income=' + income + '&expense=' + expense + '&includeTransient=' + transient + ww;
     return this.http.get('/export/payments?' + params, {responseType: 'blob'});
   }
 

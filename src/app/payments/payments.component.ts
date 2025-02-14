@@ -122,6 +122,7 @@ export class PaymentsComponent implements OnInit {
     const filterText = this.filter.text.toLocaleLowerCase().trim();
     this.filteredPayments = this.allPayments.filter(p =>
       (this.filter.income && p.amount >= 0 || this.filter.expense && p.amount < 0) &&
+      !(!this.filter.transient && p.transientExpense) &&
       (filterText.length === 0 || p.comment.toLocaleLowerCase().indexOf(filterText) !== -1));
     this.sumAll = this.allPayments.map(p => p.amount).reduce(function (a, b) {
       return a + b;
@@ -139,7 +140,7 @@ export class PaymentsComponent implements OnInit {
   onExport() {
     const filterText = this.filter.text.toLocaleLowerCase().trim();
     const word = (filterText.length === 0) ? null : filterText;
-    this.exportService.getPayments(this.currentYear, this.filter.income, this.filter.expense, word).subscribe(
+    this.exportService.getPayments(this.currentYear, this.filter.income, this.filter.expense, this.filter.transient, word).subscribe(
       (blob) => downloadPdf(blob, 'placanja-' + this.currentYear)
     );
   }
