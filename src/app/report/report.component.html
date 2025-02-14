@@ -10,7 +10,7 @@
       Nema članova
     </div>
     <div *ngIf="reportMemberships.length>0">
-      <div class="mb10"> Dug : {{activeDebt}} € <span *ngIf="activeDebt!=totalDebt">({{totalDebt}} €)</span></div>
+      <div class="mb10"> Ukupan dug : {{activeDebt}} € <span *ngIf="activeDebt!=totalDebt">({{totalDebt}} €)</span></div>
       <div class="form-check mb10">
         <button class="btn btn-outline-inverse" [ngClass]="filter.active ? 'active':''" (click)="filter.active=!filter.active;onFilterChanged()">
           Samo trenutno aktivni

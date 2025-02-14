@@ -60,4 +60,10 @@ export class EventReportTableComponent implements OnInit {
     }
     return 'super';
   }
+
+  remainingDebt() {
+    var total = this.participation.event.price * (this.participation.paidMemberIds.length + this.participation.unpaidMemberIds.length);
+    var paid = this.participation.event.price * this.participation.paidMemberIds.length;
+    return total - paid;
+  }
 }
