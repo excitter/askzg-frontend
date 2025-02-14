@@ -6,6 +6,7 @@ import {RefractionService} from '../service/refraction.service';
 import {RefractionReport} from '../model/refraction';
 import {ExportService} from '../service/export.service';
 import {downloadPdf} from '../util/pdf.util';
+import { AppDataService } from '../service/app-data.service';
 
 @Component({
   selector: 'app-refractions',
@@ -22,6 +23,7 @@ export class RefractionsComponent implements OnInit {
   constructor(
     private refractionService: RefractionService,
     private exportService: ExportService,
+    private appDataService: AppDataService,
     private route: ActivatedRoute,
     private router: Router) {
   }
@@ -52,19 +54,18 @@ export class RefractionsComponent implements OnInit {
     );
   }
 
-  countUnpaidPunishments(report: RefractionReport): Array<number> {
-    const refractions = report.refractions.reverse();
-    let count = 0;
-    for (let i = 0; i < refractions.length; i++) {
-      if (i % 2 === 1 && !refractions[i].paid) {
-        count++;
-      }
-    }
-    return Array(count);
+  countDebtOwed(report: RefractionReport): Array<number> {
+    const total = report.refractions.length;
+    const paid = report.refractions.filter(r => r.paid).length;;
+    const covered = 2 * paid;
+    const notCovered = Math.max(total - covered, 0);
+    const owed = Math.floor(notCovered / 2);
+    return new Array(owed);
   }
 
   onPay(memberId: number) {
     this.refractionService.pay(memberId).then(() => {
+      this.appDataService.reloadBalance();
       this.loadReport();
     });
   }
