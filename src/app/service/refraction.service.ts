@@ -9,8 +9,8 @@ export class RefractionService {
   constructor(private http: HttpClient) {
   }
 
-  getReport(onlyActive: boolean): Promise<RefractionReport[]> {
-    return this.http.get('/refractions/report?onlyActive=' + onlyActive).toPromise()
+  getReport(onlyActive: boolean, year: number): Promise<RefractionReport[]> {
+    return this.http.get('/refractions/report?onlyActive=' + onlyActive + '&year=' + year).toPromise()
       .then(
         (response) => response as RefractionReport[],
         (error) => Promise.reject(error.message)

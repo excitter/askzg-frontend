@@ -30,7 +30,7 @@ export class ExportService {
     return this.http.get('/export/statisticsV2?year=' + year, {responseType: 'blob'});
   }
 
-  getRefractions(onlyActive: boolean): Observable<Blob> {
-    return this.http.get('/export/refractions?onlyActive=' + onlyActive, {responseType: 'blob'});
+  getRefractions(onlyActive: boolean, year: number): Observable<Blob> {
+    return this.http.get('/export/refractions?onlyActive=' + onlyActive + '&year=' + year, {responseType: 'blob'});
   }
 }

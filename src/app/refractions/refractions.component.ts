@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {asParam, filterOf} from '../util/filter-util';
 import {Subscription} from 'rxjs';
@@ -7,14 +7,16 @@ import {RefractionReport} from '../model/refraction';
 import {ExportService} from '../service/export.service';
 import {downloadPdf} from '../util/pdf.util';
 import { AppDataService } from '../service/app-data.service';
+import { currentYear } from '../util/util-functions';
 
 @Component({
   selector: 'app-refractions',
   templateUrl: './refractions.component.html',
   styleUrls: ['./refractions.component.css']
 })
-export class RefractionsComponent implements OnInit {
+export class RefractionsComponent implements OnInit, OnDestroy {
 
+  currentYear: number;
   allRefractionReports: RefractionReport[] = [];
   refractionReports: RefractionReport[] = [];
   filter: RefractionFilter = new RefractionFilter();
@@ -28,16 +30,29 @@ export class RefractionsComponent implements OnInit {
     private router: Router) {
   }
 
+  onYearChanged(value) {
+    this.filter.year = value;
+    this.router.navigate(['refractions'], {queryParams: asParam(this.filter)});
+  }
+
   ngOnInit() {
-    this.loadReport();
     this.sub = this.route.queryParamMap.subscribe(params => {
       filterOf(this.filter, params);
-      this.filterReportMemberships();
+      if (this.currentYear !== this.filter.year) {
+        this.currentYear = this.filter.year;
+        this.loadReport(this.currentYear);
+      } else {
+        this.filterReportMemberships();
+      }
     });
   }
 
-  loadReport() {
-    this.refractionService.getReport(false).then((result) => {
+  ngOnDestroy(): void {
+    this.sub.unsubscribe();
+  }
+
+  loadReport(year) {
+    this.refractionService.getReport(true, year).then((result) => {
         this.allRefractionReports = result;
         this.filterReportMemberships();
       }
@@ -49,7 +64,7 @@ export class RefractionsComponent implements OnInit {
   }
 
   onExport() {
-    this.exportService.getRefractions(this.filter.onlyActive).subscribe(
+    this.exportService.getRefractions(this.filter.onlyActive, this.filter.year).subscribe(
       (blob) => downloadPdf(blob, 'kazne')
     );
   }
@@ -66,7 +81,7 @@ export class RefractionsComponent implements OnInit {
   onPay(memberId: number) {
     this.refractionService.pay(memberId).then(() => {
       this.appDataService.reloadBalance();
-      this.loadReport();
+      this.loadReport(this.filter.year);
     });
   }
 
@@ -79,4 +94,5 @@ export class RefractionsComponent implements OnInit {
 
 export class RefractionFilter {
   onlyActive = true;
+  year: number = currentYear();
 }

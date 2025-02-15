@@ -2,6 +2,7 @@
   <a type="button" class="btn btn-outline-inverse btn-lg pull-right mb10" (click)="onExport()">
     <span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span>
   </a>
+  <app-year-pagination (yearChanged)="onYearChanged($event)" [currentYear]="currentYear" [minYear]="2023"></app-year-pagination>
   <img src="assets/images/theme_images/loader-form.GIF" *ngIf="refractionReports==null"/>
   <div id="membershipContainer" *ngIf="refractionReports!=null" class="clearfix">
     <h4>Kazne</h4>
