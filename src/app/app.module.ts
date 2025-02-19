@@ -67,6 +67,8 @@ import {RefractionService} from './service/refraction.service';
 import {RefractionsComponent} from './refractions/refractions.component';
 import {RefractionDetailsComponent} from './refractions/details/refraction-details.component';
 import { DynamicTableComponent } from './common/table/table.component';
+import { ReportQuickContactComponent } from './report/report-quick-contact.component';
+import { QuickPayService } from './service/quick-pay.service';
 
 @NgModule({
   declarations: [
@@ -75,7 +77,7 @@ import { DynamicTableComponent } from './common/table/table.component';
     MenuComponent,
     LoginComponent,
     MembersComponent, MemberFormComponent, TotalStatisticsComponent,
-    ReportMembershipComponent, ReportComponent,
+    ReportMembershipComponent, ReportComponent, ReportQuickContactComponent,
     PaymentsComponent, PaymentFormComponent,
     EventsComponent, EventFormComponent, EventParticipationComponent,
     PaginationComponent, YearPaginationComponent,
@@ -101,7 +103,7 @@ import { DynamicTableComponent } from './common/table/table.component';
     multi: true,
   },
     AppDataService, UserDataService, PaymentDataHolder, TitleService, EventDataHolder,
-    AuthenticatedGuard, AdminAuthenticatedGuard,
+    AuthenticatedGuard, AdminAuthenticatedGuard, QuickPayService,
     ServerCheckService,
     LoginService,
     MembersService,

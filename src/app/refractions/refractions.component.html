@@ -22,7 +22,7 @@
               {{refractionReport.member.name}}
             </div>
             <div class="row no-margin" style="height: 45px">
-              <div *ngFor="let e of countDebtOwed(refractionReport);" class="unpaid-circle">
+              <div *ngFor="let e of refractionReport.refractionsOwed();" class="unpaid-circle">
               </div>
             </div>
             <div class="row no-margin">

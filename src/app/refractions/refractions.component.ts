@@ -69,15 +69,6 @@ export class RefractionsComponent implements OnInit, OnDestroy {
     );
   }
 
-  countDebtOwed(report: RefractionReport): Array<number> {
-    const total = report.refractions.length;
-    const paid = report.refractions.filter(r => r.paid).length;;
-    const covered = 2 * paid;
-    const notCovered = Math.max(total - covered, 0);
-    const owed = Math.floor(notCovered / 2);
-    return new Array(owed);
-  }
-
   onPay(memberId: number) {
     this.refractionService.pay(memberId).then(() => {
       this.appDataService.reloadBalance();

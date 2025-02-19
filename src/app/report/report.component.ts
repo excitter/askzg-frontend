@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {MemberMembershipReport} from '../model/report-membership';
+import {MemberMembershipReport, trimUnpaid} from '../model/report-membership';
 import {ReportService} from '../service/report.service';
 import {EventReport} from '../model/report-event';
 import {downloadPdf} from '../util/pdf.util';
@@ -10,6 +10,10 @@ import {asParam, filterOf} from '../util/filter-util';
 import {Subscription} from 'rxjs';
 import {currentYear} from '../util/util-functions';
 import { eventDateNum } from '../model/event';
+import { MemberDebt } from '../model/member-debt';
+import { RefractionService } from '../service/refraction.service';
+import { RefractionReport } from '../model/refraction';
+import { AppDataService } from '../service/app-data.service';
 
 @Component({
   selector: 'app-report',
@@ -28,8 +32,11 @@ export class ReportComponent implements OnInit {
   maxYear = currentYear() + 1;
   filter: ReportFilter = new ReportFilter();
   private sub: Subscription;
+  quickContactReady = false;
+  refractionReport: RefractionReport[] = [];
+  memberDebtSummary: MemberDebt[] = [];
 
-  constructor(private reportService: ReportService, private exportService: ExportService,
+  constructor(private reportService: ReportService, private exportService: ExportService, private refractionService: RefractionService, private appDataService: AppDataService,
               private route: ActivatedRoute, private router: Router) {
   }
 
@@ -55,7 +62,50 @@ export class ReportComponent implements OnInit {
     this.eventReport = null;
     this.activeDebt = 0;
     this.totalDebt = 0;
-    this.reportService.getMembershipReport(year).then(
+    this.refractionReport = [];
+    this.memberDebtSummary = [];
+    this.quickContactReady = false;
+    
+    Promise.all([
+      this.loadMembershipReport(year),
+      this.loadEventReports(year),
+      this.loadRefractionReport(year),
+    ]).then(() => {
+      this.updateMemberDebt(year);
+    });
+  }
+
+  updateMemberDebt(year: number) {
+    var now = new Date();
+    var yearNow = now.getFullYear();
+    var monthNow = now.getMonth() + 1;
+    this.memberDebtSummary = [];
+    var debts = [];
+    this.allReportMemberships.forEach( rm => {
+      var member = rm.member;
+      var events = this.eventReport.participations.filter(p => p.unpaidMemberIds.includes(member.id)).map(p => p.event);
+      var refractions = this.refractionReport.filter(r => r.member.id === member.id);
+      var rrefraction = (refractions.length > 0) ? refractions[0] : null;
+      var debt = new MemberDebt(
+        year,
+        yearNow == this.currentYear ? trimUnpaid(rm, monthNow) : rm,
+        events,
+        rrefraction,
+      );
+      debts.push(debt);
+    });
+    this.memberDebtSummary = debts;
+    this.quickContactReady = true;
+  }
+
+  loadRefractionReport(year): Promise<void> {
+    return this.refractionService.getReport(false, year).then((result) => {
+      this.refractionReport = result;
+    });
+  }
+
+  loadMembershipReport(year): Promise<void> {
+    return this.reportService.getMembershipReport(year).then(
       (result) => {
         this.allReportMemberships = result;
         for (let i = 0; i < this.allReportMemberships.length; i++) {
@@ -67,11 +117,10 @@ export class ReportComponent implements OnInit {
         this.filterReportMemberships();
       }
     );
-    this.loadEventReports(year);
   }
 
-  loadEventReports(year) {
-    this.reportService.getEventReport(year).then(
+  loadEventReports(year): Promise<void> {
+    return this.reportService.getEventReport(year).then(
       (result) => {
         this.eventDebt = 0;
         result.participations = result.participations.filter(p => p.event.price).sort((a, b) => eventDateNum(b.event)- eventDateNum(a.event));
@@ -82,6 +131,11 @@ export class ReportComponent implements OnInit {
         };
       }
     );
+  }
+
+  memberPaid() {
+    this.loadReports(this.currentYear);
+    this.appDataService.reloadBalance();
   }
 
   onChangeDebt() {
