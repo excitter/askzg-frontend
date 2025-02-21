@@ -8,6 +8,10 @@
   margin-bottom: 30px;
 }
 
+#quickPayContainer{
+  margin-bottom: 30px;
+}
+
 .active {
   color: green;
   border-color: green;

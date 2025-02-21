@@ -133,9 +133,19 @@ export class ReportComponent implements OnInit {
     );
   }
 
-  memberPaid() {
-    this.loadReports(this.currentYear);
+  memberPaid(member) {
     this.appDataService.reloadBalance();
+    for (let i = 0; i < this.memberDebtSummary.length; i++) {
+      var current = this.memberDebtSummary[i];
+      if (current.membershipReport.member.id === member.id) {
+        current.eventDebts = [];
+        current.refractionDebts = [];
+        current.membershipReport.debt = 0;
+        current.membershipReport.paidMonths.concat(current.membershipReport.owedMonths);
+        current.membershipReport.owedMonths = [];
+        current.debt = 0;
+      }
+    }
   }
 
   onChangeDebt() {

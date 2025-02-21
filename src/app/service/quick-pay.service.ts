@@ -17,7 +17,7 @@ export class QuickPayService {
         };
         return this.http.post('/quickpay/member', request).toPromise().then(
             () => Promise.resolve(true),
-            (error) => Promise.reject(error.message)
+            (error) => Promise.reject(error.message),
         );
     }
 

@@ -4,18 +4,18 @@
   </a>
   <app-year-pagination [currentYear]="currentYear" (yearChanged)="onYearChanged($event)" [maxYear]="maxYear"></app-year-pagination>
   <img src="assets/images/theme_images/loader-form.GIF" *ngIf="reportMemberships==null"/>
-  <div id="quickContactContainer" class="clearfix">
+  <div id="quickPayContainer" class="clearfix">
     <h4>Brza naplata</h4>
     <div *ngIf="!quickContactReady">
       Loading...
     </div>
     <div *ngIf="quickContactReady">
       <div class="form-check mb10">
-        <button class="btn btn-outline-inverse" [ngClass]="filter.active ? 'active':''" (click)="filter.active=!filter.active;onFilterChanged()" (debtChangedEvent)="memberPaid()">
+        <button class="btn btn-outline-inverse" [ngClass]="filter.active ? 'active':''" (click)="filter.active=!filter.active;onFilterChanged()">
           Samo trenutno aktivni
         </button>
       </div>
-      <app-report-quick-contact *ngFor="let qc of memberDebtSummary" [memberDebtSummary]="qc"></app-report-quick-contact>
+      <app-report-quick-contact *ngFor="let qc of memberDebtSummary" [memberDebtSummary]="qc" (debtChangedEvent)="memberPaid($event)"></app-report-quick-contact>
     </div>
   </div> 
   <div id="membershipContainer" *ngIf="reportMemberships!=null" class="clearfix">

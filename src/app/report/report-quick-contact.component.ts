@@ -37,6 +37,9 @@ export class ReportQuickContactComponent implements OnInit {
     }
 
     onOpen(): void {
+        if (this.memberDebtSummary.debt == 0) {
+            return;
+        }
         this.state = 1;
     }
 
@@ -45,23 +48,21 @@ export class ReportQuickContactComponent implements OnInit {
     }
 
     calculateStatusClass(): string {
-        switch (this.state) {
-            case 2:
-                return 'super';
-            case 1:
-                return 'ok';
-            case 0:
-            default:
-                return 'danger';
+        if (this.memberDebtSummary.debt > 0) {
+            return 'danger';
         }
+        return 'super';
     }
 
-    onPay() {
+    onPay(): void {
         if (this.memberDebtSummary.debt <= 0) {
             return;
         }
         this.quickPayService.payDebt(this.memberDebtSummary).then(() => {
-            this.debtChangedEvent.emit(this.memberDebtSummary.membershipReport.member);
+            if (this.debtChangedEvent != null) {
+                this.debtChangedEvent.emit(this.memberDebtSummary.membershipReport.member);
+            }
+            this.state = 0;
         });
     }
 }

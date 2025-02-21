@@ -1,42 +1,83 @@
-.participated {
-    border-color: green;
+.ok > div {
+  border: 1px solid white;
+}
+
+.name {
+  font-size: 1.2em !important;
+  line-height: 45px;
+}
+
+.danger > div {
+  border: 2px solid red !important;
+}
+
+.super > div {
+  border: 2px solid green !important;
+}
+
+.ok-sign {
+  line-height: 45px;
+  color: green;
+}
+
+.options {
+  width: 100%;
+  cursor: pointer;
+  height: 140px;
+  line-height: 60px;
+  border-width: 2px;
+  border-radius: 4px;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.debt-amount {
+  font-size: 0.9em;
+  line-height: 40px;
+}
+
+.option,
+.option:hover,
+.option:focus,
+.option:active {
+  transition: all 0.4s;
+  border-radius: 0;
+  font-family: 'Exo', sans-serif;
+}
+
+.only-option {
+  line-height: 115px;
+}
+
+.options-container {
+  color: #fff;
+  background-color: transparent;
+  border-color: #fff;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+.pay-action {
+  padding: 0;
+}
+
+.months {
+  font-size: 0.7em;
+  line-height: 20px;
+  word-break: break-all;
+  white-space: normal;
+}
+
+.copying {
+  color: green;
+}
+
+.owed {
+  color: red;
+}
+
+@media (min-width: 768px) {
+  .months {
+    font-size: 0.8em;
   }
-  
-  .not-participated {
-    border-color: red;
-  }
-  
-  .danger > div {
-    border: 2px solid red !important;
-  }
-  
-  .super > div {
-    border: 2px solid green !important;
-  }
-  
-  .options {
-    width: 100%;
-    cursor: pointer;
-    height: 120px;
-    line-height: 75px;
-    border-width: 2px;
-    border-radius: 4px;
-  }
-  
-  .back-btn {
-    margin-bottom: 15px;
-  }
-  
-  .name {
-    line-height: 25px;
-    white-space: initial;
-    font-size: 0.9em
-  }
-  
-  .details {
-  }
-  
-  .smaller{
-    font-size: 0.9em;
-  }
-  
+}
