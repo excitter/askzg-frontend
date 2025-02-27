@@ -3,6 +3,7 @@ import {UserService} from '../service/user.service';
 import {User} from '../model/user-data';
 import {MembersService} from '../service/members.service';
 import {Member} from '../model/member';
+import { ClipboardService } from 'ngx-clipboard';
 
 @Component({
   selector: 'app-users',
@@ -18,7 +19,7 @@ export class UsersComponent implements OnInit {
   month: number;
   year: number;
 
-  constructor(private userService: UserService, private memberService: MembersService) {
+  constructor(private userService: UserService, private memberService: MembersService, private clipboardService: ClipboardService) {
   }
 
   ngOnInit() {
@@ -28,11 +29,15 @@ export class UsersComponent implements OnInit {
 
   onAddUser() {
     this.userService.addUser(this.user.username).then(
-      () => {
-        this.user = new User();
+      (created) => {
+        this.user = created;
         this.loadUsers();
       }
     );
+  }
+
+  onCopy() {
+      this.clipboardService.copyFromContent(this.user.password);
   }
 
   onDelete(id: number) {

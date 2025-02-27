@@ -13,4 +13,5 @@ export class UserData {
 export class User {
   username: string;
   lastActivity: string;
+  password: string;
 }
