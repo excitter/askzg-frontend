@@ -26,12 +26,13 @@ export class ReportQuickContactComponent implements OnInit {
     ngOnInit(): void {
         this.canCopy = this.memberDebtSummary.debt > 0;
         if (this.canCopy) {
-            const manifest =  this.memberDebtSummary.debthManifest().join('  \r\n');
+            const manifest =  this.memberDebtSummary.debthManifest().join('\n');
             this.text = `${manifest}\nUkupno = ${this.memberDebtSummary.debt}€`;
         }
         const phone = this.memberDebtSummary.membershipReport.member.phone;
         if (this.text != null && phone != null) {
-            const formatted = `whatsapp://send?text=${this.text}&phone=${phone}`;
+            var encoded = encodeURIComponent(this.text);
+            const formatted = `whatsapp://send?text=${encoded}&phone=${phone}`;
             this.whatsAppText = this.domSanitizer.bypassSecurityTrustResourceUrl(formatted);
         }
     }
