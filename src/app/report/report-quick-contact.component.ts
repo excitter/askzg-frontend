@@ -26,7 +26,7 @@ export class ReportQuickContactComponent implements OnInit {
     ngOnInit(): void {
         this.canCopy = this.memberDebtSummary.debt > 0;
         if (this.canCopy) {
-            const manifest =  this.memberDebtSummary.debthManifest().join('\n');
+            const manifest =  this.memberDebtSummary.debthManifest().join('  \r\n');
             this.text = `${manifest}\nUkupno = ${this.memberDebtSummary.debt}€`;
         }
         const phone = this.memberDebtSummary.membershipReport.member.phone;
