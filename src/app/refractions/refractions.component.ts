@@ -3,7 +3,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {asParam, filterOf} from '../util/filter-util';
 import {Subscription} from 'rxjs';
 import {RefractionService} from '../service/refraction.service';
-import {RefractionReport} from '../model/refraction';
+import {RefractionReport, refractionsOwed} from '../model/refraction';
 import {ExportService} from '../service/export.service';
 import {downloadPdf} from '../util/pdf.util';
 import { AppDataService } from '../service/app-data.service';
@@ -28,6 +28,9 @@ export class RefractionsComponent implements OnInit, OnDestroy {
     private appDataService: AppDataService,
     private route: ActivatedRoute,
     private router: Router) {
+  }
+  contextRefractionsOwed(refrationReport) {
+    return refractionsOwed(refrationReport);
   }
 
   onYearChanged(value) {
